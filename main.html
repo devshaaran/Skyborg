@@ -1,0 +1,54 @@
+<!DOCTYPE html><html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon\" href="data:,">
+<style>body { text-align: center; font-family: "Trebuchet MS", Arial; margin-left:auto; margin-right:auto; background-color:black; color:green;}
+.slider1 { width: 300px; }
+.slider2 { width: 300px; }
+.slider3 { width: 300px; }
+.slider4 { width: 300px; }</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+    <body><h1>Drone axis control</h1>
+    <p>Throttle: <span id="servoPos1"></span></p>       
+    <input type="range" min="0" max="1023" class="slider1" id="servoSlider1" onchange="servo1(this.value)" value1=""+valueString1>
+    <p>Roll: <span id="servoPos2"></span></p>
+    <input type="range" min="0" max="1023" class="slider2" id="servoSlider2" onchange="servo2(this.value)" value2=""+valueString2>
+    <p>Pitch: <span id="servoPos3"></span></p>
+    <input type="range" min="0" max="1023" class="slider3" id="servoSlider3" onchange="servo3(this.value)" value3=""+valueString3>
+    <p>Yaw: <span id="servoPos4"></span></p>
+    <input type="range" min="0" max="1023" class="slider4" id="servoSlider4" onchange="servo4(this.value)" value4=""+valueString4>
+
+
+
+    <script>
+        
+        var slider1 = document.getElementById("servoSlider1");
+        var servoP1 = document.getElementById("servoPos1"); servoP1.innerHTML = slider1.value;
+        slider1.oninput = function() { slider1.value = this.value; servoP1.innerHTML = this.value; }
+        $.ajaxSetup({timeout:1000}); function servo1(pos) { 
+        $.get("/?value1=" + pos + "&"); {Connection: close}; }
+
+        var slider2 = document.getElementById("servoSlider2");
+        var servoP2 = document.getElementById("servoPos2"); servoP2.innerHTML = slider2.value;
+        slider2.oninput = function() { slider2.value = this.value; servoP2.innerHTML = this.value; }
+        $.ajaxSetup({timeout:1000}); function servo2(pos) { 
+        $.get("/?value2=" + pos + "&"); {Connection: close}; }
+
+        var slider3 = document.getElementById("servoSlider3");
+        var servoP3 = document.getElementById("servoPos3"); servoP3.innerHTML = slider3.value;
+        slider3.oninput = function() { slider3.value = this.value; servoP3.innerHTML = this.value; }
+        $.ajaxSetup({timeout:1000}); function servo3(pos) { 
+        $.get("/?value3=" + pos + "&"); {Connection: close}; }
+
+        var slider4 = document.getElementById("servoSlider4");
+        var servoP4 = document.getElementById("servoPos4"); servoP4.innerHTML = slider4.value;
+        slider4.oninput = function() { slider4.value = this.value; servoP4.innerHTML = this.value; }
+        $.ajaxSetup({timeout:1000}); function servo4(pos) { 
+        $.get("/?value4=" + pos + "&"); {Connection: close}; }
+
+
+    </script>
+    </body>
+    </html>
+                    
