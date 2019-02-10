@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div id="js1"></div>
+    <div id="js2"></div>
+    <div id="js3"></div>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.min.js"></script>
+    <script>
+	var throttle=0, pitch=90, roll=90, yaw=90, q;
+	const newMin=0,newMax=180, oldMin = -50, oldMax = 50
+        var js1 = nipplejs.create({
+        zone: document.getElementById('js1'),
+        mode: 'static',
+        position: {left: '15%', top: '10%'},
+        color: 'red'
+    });
+
+	js1.on('move end', function(evt, data){
+		var x,y;
+		if(evt.type === 'move'){
+			x = data.instance.frontPosition.x;
+			y = -(data.instance.frontPosition.y);
+		}
+		else if(evt.type === 'end'){
+			x = data.frontPosition.x;
+			y = -(data.frontPosition.y);
+		}
+		roll = Math.round(newMin + ((x-oldMin)/(oldMax - oldMin))*(newMax - newMin));
+		pitch = Math.round((newMin + ((y-oldMin)/(oldMax - oldMin))*(newMax - newMin)));
+		q = `/?value=:${throttle},${roll},${pitch},${yaw}&`;
+		console.log(q);
+	});
+	 var js2 = nipplejs.create({
+        zone: document.getElementById('js2'),
+        mode: 'static',
+        position: {left: '45%', top: '10%'},
+        color: 'red',
+        lockX:true
+    });
+	js2.on('move end', function(evt, data){
+		if(evt.type === 'move'){
+			e = data.instance.frontPosition.x;
+		}
+		else if(evt.type === 'end'){
+			e = data.frontPosition.x;
+		}
+		
+		yaw= Math.round(newMin + ((e-oldMin)/(oldMax - oldMin))*(newMax - newMin));
+		q = `/?value=:${throttle},${roll},${pitch},${yaw}&`;
+		console.log(q);
+	});
+        var js3 = nipplejs.create({
+        zone: document.getElementById('js3'),
+        mode: 'static',
+        position: {left: '75%', top: '10%'},
+        color: 'red',
+        lockY:true,
+        restJoystick:false
+    });
+	js3.on('move end', function(evt, data){
+		if(evt.type === 'move'){
+			e = -(data.instance.frontPosition.y);
+		}
+		else if(evt.type === 'end'){
+			e = -(data.frontPosition.y);
+		}
+		throttle = Math.round((newMin + ((e-oldMin)/(oldMax - oldMin))*(newMax - newMin)));
+		q = `/?value=:${throttle},${roll},${pitch},${yaw}&`;
+		console.log(q);
+	});
+    </script>
+    </body>
+</html>
