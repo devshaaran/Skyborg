@@ -1,2 +1,5 @@
-# drone-soft---MANUAL
-WILL BE UPDATED 
+# Skyborg
+
+Autmoted drone aviation for defense 
+
+
